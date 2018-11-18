@@ -26,6 +26,15 @@ public class Move : MonoBehaviour {
                 Vector3 pos = transform.position;
                 pos.x += Input.GetAxis("Horizontal") * 0.1f;
                 pos.y += Input.GetAxis("Vertical") * 0.1f;
+                if(pos.x != transform.position.x || pos.y != transform.position.y)
+                {
+                    GetComponent<Animator>().SetBool("Running", true);
+                }
+                else
+                {
+                    GetComponent<Animator>().SetBool("Running", false);
+
+                }
                 transform.position = pos;
                 GetComponent<SpriteRenderer>().sortingOrder = -(int)(transform.position.y * 32);
                 break;
