@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Football.unity
     guid: f495e3c2051576d45922b00823075aac
+  - enabled: 1
+    path: Assets/Scenes/Cricket.unity
+    guid: 2b6049f7a7c575e4e9f9ab550546426d
   m_configObjects: {}

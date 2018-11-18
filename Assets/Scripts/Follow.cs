@@ -14,7 +14,7 @@ public class Follow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (FindObjectOfType<GameManager>().game == 0)
+        if (FindObjectOfType<GameManager>().game == 0 && target)
         {
             Vector3 pos = transform.position;
             pos.x = target.position.x;

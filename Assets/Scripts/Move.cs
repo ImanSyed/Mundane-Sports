@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Move : MonoBehaviour {
 
@@ -19,6 +20,10 @@ public class Move : MonoBehaviour {
                 kayakspeed = 1;
             }
         }
+        else if(FindObjectOfType<GameManager>().game == 2)
+        {
+            GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody2D>().AddForce(Vector2.left * 1000);
+        }
     }
 
     void Update () {
@@ -31,6 +36,14 @@ public class Move : MonoBehaviour {
                 if(pos.x != transform.position.x || pos.y != transform.position.y)
                 {
                     GetComponent<Animator>().SetBool("Running", true);
+                    if(pos.x < transform.position.x)
+                    {
+                        GetComponent<SpriteRenderer>().flipX = true;
+                    }
+                    else
+                    {
+                        GetComponent<SpriteRenderer>().flipX = false;
+                    }
                 }
                 else
                 {
@@ -41,22 +54,37 @@ public class Move : MonoBehaviour {
                 GetComponent<SpriteRenderer>().sortingOrder = -(int)(transform.position.y * 32);
                 break;
             case 1:
-                Vector2 forcePos = transform.position;
-                forcePos.x += 1f;
-                if((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && left)
+                if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && left)
                 {
                     GetComponent<Rigidbody2D>().AddForce(Vector2.right * kayakspeed);
+                    GetComponent<Animator>().Play("PC_KayakL", 0);
                     left = false;
                 }
                 if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && !left)
                 {
                     GetComponent<Rigidbody2D>().AddForce(Vector2.right * kayakspeed);
+                    GetComponent<Animator>().Play("PC_KayakR", 0);
                     left = true;
+                }
+                break;
+            case 2:
+                if (Input.anyKeyDown)
+                {
+                    StartCoroutine(Hit());
                 }
                 break;
         }
         
 	}
+
+    IEnumerator Hit()
+    {
+        yield return new WaitForSeconds(0.1f);
+        GetComponent<Collider2D>().enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<Collider2D>().enabled = false;
+
+    }
 
     public void GetGame(short num)
     {

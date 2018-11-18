@@ -9,17 +9,26 @@ public class GameManager : MonoBehaviour {
 
     public int score = 0;
 
-    float timer = 10;
+    float timer = 8;
 
-    [SerializeField] Text time;
+    [SerializeField] Text timeText, scoreText;
 
     private void Start()
     {
+        scoreText = FindObjectOfType<Text>();
+        scoreText.text = score.ToString();
         foreach(GameManager gm in FindObjectsOfType<GameManager>())
         {
-            if(gm != this)
+            if (gm != this)
             {
-                Destroy(gm.gameObject);
+                if (gm.score > score)
+                {
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    Destroy(gm.gameObject);
+                }
             }
         }
         DontDestroyOnLoad(gameObject);
@@ -39,9 +48,9 @@ public class GameManager : MonoBehaviour {
                 }
                 break;
             case 2:
-                if (SceneManager.GetActiveScene().name != "Football")
+                if (SceneManager.GetActiveScene().name != "Cricket")
                 {
-                    SceneManager.LoadScene("Football");
+                    SceneManager.LoadScene("Cricket");
                 }
                 break;
         }
@@ -51,6 +60,11 @@ public class GameManager : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        if (!scoreText)
+        {
+            scoreText = FindObjectOfType<Text>();
+            scoreText.text = score.ToString();
+        }
         if(timer > 0)
         {
             timer -= Time.deltaTime;
@@ -61,7 +75,7 @@ public class GameManager : MonoBehaviour {
         }
         if(timer == 0)
         {
-
+            GameOver();
         }
 
         if(game == 0)
@@ -85,11 +99,12 @@ public class GameManager : MonoBehaviour {
 
     public void NextGame()
     {
+        timer = 8;
         score++;
         short currGame = game;
         while (currGame == game)
         {
-            game = (short)Random.Range(0, 2);
+            game = (short)Random.Range(0, 3);
         }
         
         switch(game)
@@ -103,9 +118,15 @@ public class GameManager : MonoBehaviour {
                 FindObjectOfType<Move>().GetGame(game);
                 break;
             case 2:
-                SceneManager.LoadScene("Football");
+                SceneManager.LoadScene("Cricket");
                 FindObjectOfType<Move>().GetGame(game);
                 break;
         }
+    }
+
+    void GameOver()
+    {
+        score = 0;
+        scoreText.text = score.ToString();
     }
 }
