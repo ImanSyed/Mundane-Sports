@@ -7,7 +7,6 @@ public class Goal : MonoBehaviour {
         if(collision.gameObject.tag == "Ball")
         {
             FindObjectOfType<GameManager>().NextGame();
-            Debug.Log(120897);
         }
     }
 }

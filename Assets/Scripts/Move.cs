@@ -2,14 +2,37 @@
 
 public class Move : MonoBehaviour {
 
-    [SerializeField] float speed = 0.1f;
+    short controlScheme;
 
 	void Update () {
-        Vector3 pos = transform.position;
-        pos.x += Input.GetAxis("Horizontal") * speed;
-        pos.y += Input.GetAxis("Vertical") * speed;
-        transform.position = pos;
+        switch (controlScheme)
+        {
+            case 0:
+                Vector3 pos = transform.position;
+                pos.x += Input.GetAxis("Horizontal") * 0.1f;
+                pos.y += Input.GetAxis("Vertical") * 0.1f;
+                transform.position = pos;
+                break;
+            case 1:
+                Vector2 forcePos = transform.position;
+                forcePos.x += 10f;
+                if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                {
+                    GetComponent<Rigidbody2D>().AddForceAtPosition((Vector2.right + Vector2.up * 2), forcePos);
+                }
+                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                {
+                    GetComponent<Rigidbody2D>().AddForceAtPosition((Vector2.right  + Vector2.down * 2), forcePos);
+                }
+                break;
+        }
+        
 	}
+
+    public void GetGame(short num)
+    {
+        controlScheme = num;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
