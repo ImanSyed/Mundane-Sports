@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 422870897}
   - component: {fileID: 422870895}
   - component: {fileID: 422870898}
+  - component: {fileID: 422870899}
   m_Layer: 8
   m_Name: Ball
   m_TagString: Ball
@@ -181,7 +182,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -200
   m_Sprite: {fileID: 21300000, guid: bb433b29515f5d04ea4df346067dece2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -241,6 +242,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!95 &422870899
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 422870894}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +309,7 @@ Camera:
   far clip plane: 100
   field of view: 40
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 16.875
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -574,7 +593,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4364331622463334, guid: f3673c825e9b8a947a1535f1a95ac02b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.83
+      value: 1.33
       objectReference: {fileID: 0}
     - target: {fileID: 4364331622463334, guid: f3673c825e9b8a947a1535f1a95ac02b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -859,8 +878,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1285412875}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.07, y: 2.89, z: 2}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalPosition: {x: 23.926, y: 0.469, z: 2}
+  m_LocalScale: {x: 20.947899, y: 61.205082, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
