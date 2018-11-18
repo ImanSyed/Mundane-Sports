@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
@@ -8,9 +9,9 @@ public class GameManager : MonoBehaviour {
 
     public int score = 0;
 
-    float timer = 6;
+    float timer = 10;
 
-
+    [SerializeField] Text time;
 
     private void Start()
     {
@@ -62,12 +63,35 @@ public class GameManager : MonoBehaviour {
         {
 
         }
+
+        if(game == 0)
+        {
+            if(GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody2D>().velocity.magnitude > 0)
+            {
+                if (!GameObject.FindGameObjectWithTag("Ball").GetComponent<Animator>().GetBool("Rolling"))
+                {
+                    GameObject.FindGameObjectWithTag("Ball").GetComponent<Animator>().SetBool("Rolling", true);
+                }
+            }
+            else
+            {
+                if (GameObject.FindGameObjectWithTag("Ball").GetComponent<Animator>().GetBool("Rolling"))
+                {
+                    GameObject.FindGameObjectWithTag("Ball").GetComponent<Animator>().SetBool("Rolling", false);
+                }
+            }
+        }
     }
 
     public void NextGame()
     {
         score++;
-        game = (short)Random.Range(0, 2);
+        short currGame = game;
+        while (currGame == game)
+        {
+            game = (short)Random.Range(0, 2);
+        }
+        
         switch(game)
         {
             case 0:

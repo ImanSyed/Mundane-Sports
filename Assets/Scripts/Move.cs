@@ -9,6 +9,8 @@ public class Move : MonoBehaviour {
 
     private void Start()
     {
+        controlScheme = FindObjectOfType<GameManager>().game;
+
         if (FindObjectOfType<GameManager>().game == 1)
         {
             kayakspeed = (short)(20 - FindObjectOfType<GameManager>().score);
