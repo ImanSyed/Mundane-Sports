@@ -3,8 +3,23 @@
 public class Move : MonoBehaviour {
 
     short controlScheme;
+    bool left;
+    short kayakspeed = 20;
 
-	void Update () {
+
+    private void Start()
+    {
+        if (FindObjectOfType<GameManager>().game == 1)
+        {
+            kayakspeed = (short)(20 - FindObjectOfType<GameManager>().score);
+            if (kayakspeed < 1)
+            {
+                kayakspeed = 1;
+            }
+        }
+    }
+
+    void Update () {
         switch (controlScheme)
         {
             case 0:
@@ -15,14 +30,16 @@ public class Move : MonoBehaviour {
                 break;
             case 1:
                 Vector2 forcePos = transform.position;
-                forcePos.x += 10f;
-                if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                forcePos.x += 1f;
+                if((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && left)
                 {
-                    GetComponent<Rigidbody2D>().AddForceAtPosition((Vector2.right + Vector2.up * 2), forcePos);
+                    GetComponent<Rigidbody2D>().AddForce(Vector2.right * kayakspeed);
+                    left = false;
                 }
-                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && !left)
                 {
-                    GetComponent<Rigidbody2D>().AddForceAtPosition((Vector2.right  + Vector2.down * 2), forcePos);
+                    GetComponent<Rigidbody2D>().AddForce(Vector2.right * kayakspeed);
+                    left = true;
                 }
                 break;
         }
@@ -36,13 +53,13 @@ public class Move : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<Rigidbody2D>())
+        if (collision.gameObject.tag == "Ball")
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             Vector2 foot = transform.position;
-            foot.y -= 0.75f;
+            foot.y -= 1;
             Vector2 dir = (Vector2)collision.gameObject.transform.position - foot;
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir.normalized * 250);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir.normalized * 200);
         }
+        
     }
 }

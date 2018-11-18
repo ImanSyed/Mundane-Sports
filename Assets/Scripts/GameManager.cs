@@ -6,21 +6,20 @@ public class GameManager : MonoBehaviour {
 
     public short game = 0;
 
-    int score = 0;
+    public int score = 0;
 
     float timer = 6;
 
-    GameManager gm;
+
 
     private void Start()
     {
-        if (gm == null)
+        foreach(GameManager gm in FindObjectsOfType<GameManager>())
         {
-            gm = this;
-        }
-        else if(gm != this)
-        {
-            Destroy(gameObject);
+            if(gm != this)
+            {
+                Destroy(gm.gameObject);
+            }
         }
         DontDestroyOnLoad(gameObject);
         game = 1;
@@ -77,9 +76,11 @@ public class GameManager : MonoBehaviour {
                 break;
             case 1:
                 SceneManager.LoadScene("Kayak");
+                FindObjectOfType<Move>().GetGame(game);
                 break;
             case 2:
                 SceneManager.LoadScene("Football");
+                FindObjectOfType<Move>().GetGame(game);
                 break;
         }
     }

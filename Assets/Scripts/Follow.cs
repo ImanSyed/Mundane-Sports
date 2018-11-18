@@ -2,12 +2,15 @@
 
 public class Follow : MonoBehaviour {
 
-    public Transform target;
+    Transform target;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        if (FindObjectOfType<GameManager>().game == 0)
+        {
+            target = GameObject.FindGameObjectWithTag("Ball").transform;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
