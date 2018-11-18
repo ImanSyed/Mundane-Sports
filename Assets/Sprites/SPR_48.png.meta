@@ -6,6 +6,10 @@ TextureImporter:
     21300002: SPR_48_1
     21300004: SPR_48_2
     21300006: SPR_48_3
+    21300008: SPR_48_4
+    21300010: SPR_48_5
+    21300012: SPR_48_6
+    21300014: SPR_48_7
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -92,6 +96,86 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 450dbe8cf7ee49f4388266376ed9f6dc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPR_48_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d7c5cee26c743b49a287489de7e9cc9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPR_48_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 494b26251c337e64cac35253b1af5c26
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPR_48_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee4d1c10a9151934abf1b5fe011a37af
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPR_48_4
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
         width: 48
         height: 48
@@ -102,13 +186,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30268aefba1139e45b3b629f78adbfe8
+      spriteID: 1bb4473b830dfb74895fc69e67d6fcd4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPR_48_1
+      name: SPR_48_5
       rect:
         serializedVersion: 2
         x: 48
@@ -122,13 +206,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c1393d4d00a5024fb1a8156e2305bb0
+      spriteID: 49302586ee65364428ff70c3109acfd7
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPR_48_2
+      name: SPR_48_6
       rect:
         serializedVersion: 2
         x: 96
@@ -142,13 +226,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26e3ecd489a6826488f1d6fccc873206
+      spriteID: a918621edd0f14b4aa28c5fbd9c0af64
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPR_48_3
+      name: SPR_48_7
       rect:
         serializedVersion: 2
         x: 144
@@ -162,7 +246,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6bbda4d62255b24185bc092b2d590f6
+      spriteID: 222bd38e58c964648ab3b67f2dc0570f
       vertices: []
       indices: 
       edges: []
