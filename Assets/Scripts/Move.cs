@@ -27,6 +27,7 @@ public class Move : MonoBehaviour {
                 pos.x += Input.GetAxis("Horizontal") * 0.1f;
                 pos.y += Input.GetAxis("Vertical") * 0.1f;
                 transform.position = pos;
+                GetComponent<SpriteRenderer>().sortingOrder = -(int)(transform.position.y * 32);
                 break;
             case 1:
                 Vector2 forcePos = transform.position;
