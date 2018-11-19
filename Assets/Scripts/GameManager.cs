@@ -10,11 +10,18 @@ public class GameManager : MonoBehaviour {
 
     public int score = 0;
 
-    float timer = 9;
+    float timer = 0;
+
+    [SerializeField] AudioClip click;
+
+    [SerializeField] Sprite black;
 
     [SerializeField] Text scoreText;
 
     public Slider time;
+
+    public bool disabled, active;
+
 
     [SerializeField] GameObject staticEffect;
 
@@ -22,13 +29,13 @@ public class GameManager : MonoBehaviour {
     {
         scoreText = FindObjectOfType<Text>();
         scoreText.text = score.ToString();
-        staticEffect.SetActive(false);
+        
         time = FindObjectOfType<Slider>();
         foreach(GameManager gm in FindObjectsOfType<GameManager>())
         {
             if (gm != this)
             {
-                if (gm.score > score)
+                if (gm.active)
                 {
                     Destroy(gameObject);
                 }
@@ -39,55 +46,42 @@ public class GameManager : MonoBehaviour {
             }
         }
         DontDestroyOnLoad(gameObject);
-        game = (short)Random.Range(0, 3);
-        switch (game)
-        {
-            case 0:
-                if (SceneManager.GetActiveScene().name != "Football")
-                {
-                    SceneManager.LoadScene("Football");
-                }
-                break;
-            case 1:
-                if (SceneManager.GetActiveScene().name != "Kayak")
-                {
-                    SceneManager.LoadScene("Kayak");
-                }
-                break;
-            case 2:
-                if (SceneManager.GetActiveScene().name != "Cricket")
-                {
-                    SceneManager.LoadScene("Cricket");
-                }
-                break;
-        }
-        FindObjectOfType<Move>().GetGame(game);
-
     }
 
     private void Update()
     {
 
+        if(game == -1 && !disabled && Input.anyKeyDown)
+        {
+            active = false;
+            NextGame();
+        }
+
         if (!scoreText)
         {
             scoreText = FindObjectOfType<Text>();
-            scoreText.text = score.ToString();
+            if (game != -1)
+            {
+                scoreText.text = score.ToString();
+            }
         }
         if (timer > 0)
         {
             timer -= Time.deltaTime;
-            
         }
         else if (timer < 0)
         {
             timer = 0;
         }
-        if (timer == 0)
+        if (timer == 0 && game != -1)
         {
             time.enabled = false;
             GameOver();
         }
-        time.value = (int)timer;
+        if (game != -1)
+        {
+            time.value = (int)timer;
+        }
     }
 
     private void FixedUpdate()
@@ -113,7 +107,8 @@ public class GameManager : MonoBehaviour {
 
     public void NextGame()
     {
-        timer = 9;
+        StartCoroutine(DisableControls(0.5f));
+        timer = 10;
         score++;
         short currGame = game;
 
@@ -145,15 +140,30 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator Static()
     {
+        
         FindObjectOfType<AudioSource>().Play();
         staticEffect.SetActive(true);
-        yield return new WaitForSeconds(0.311f);
+        GetComponentInChildren<Animator>().Play("StaticScreen", 0);
+        yield return new WaitForSeconds(0.75f);
         staticEffect.SetActive(false);
     }
 
-    void GameOver()
+    public void GameOver()
     {
-        score = 0;
-        scoreText.text = score.ToString();
+        game = -1;
+        StartCoroutine(DisableControls(1f));
+        active = true;
+        SceneManager.LoadScene("Off");
+        staticEffect.SetActive(true);
+        GetComponent<AudioSource>().PlayOneShot(click);
+        GetComponentInChildren<Animator>().Play("SwitchOff", 0);
+        scoreText.color = Color.white;
+    }
+
+    public IEnumerator DisableControls(float delay)
+    {
+        disabled = true;
+        yield return new WaitForSeconds(delay);
+        disabled = false;
     }
 }
