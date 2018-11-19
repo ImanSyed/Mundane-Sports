@@ -2,11 +2,21 @@
 
 public class Goal : MonoBehaviour {
 
+    [SerializeField] bool antiGoal;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Ball")
+        if (collision.gameObject.tag == "Ball")
         {
-            FindObjectOfType<GameManager>().NextGame();
+            if (!antiGoal)
+            {
+                FindObjectOfType<GameManager>().NextGame();
+            }
+            else
+            {
+                FindObjectOfType<GameManager>().GameOver();
+
+            }
         }
     }
 }

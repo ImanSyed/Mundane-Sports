@@ -4,10 +4,11 @@ using System.Collections;
 
 public class Move : MonoBehaviour {
 
+
+    [SerializeField] AudioClip hit;
     short controlScheme;
     bool left;
     short kayakspeed = 20;
-
 
     private void Start()
     {
@@ -61,36 +62,36 @@ public class Move : MonoBehaviour {
                 {
                     GetComponent<Rigidbody2D>().AddForce(Vector2.right * kayakspeed);
                     GetComponent<Animator>().Play("PC_KayakL", 0);
+                    FindObjectOfType<GameManager>().GetComponent<AudioSource>().PlayOneShot(hit);
                     left = false;
                 }
                 if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && !left)
                 {
                     GetComponent<Rigidbody2D>().AddForce(Vector2.right * kayakspeed);
                     GetComponent<Animator>().Play("PC_KayakR", 0);
+                    FindObjectOfType<GameManager>().GetComponent<AudioSource>().PlayOneShot(hit);
                     left = true;
                 }
                 break;
             case 2:
-                if (Input.anyKeyDown)
+                if (Input.anyKeyDown && !FindObjectOfType<GameManager>().disabled)
                 {
                     if (!GetComponent<Collider2D>().enabled)
                     {
+                        GetComponent<Animator>().Play("PC_Cricket", 0);
+                        GetComponent<Collider2D>().enabled = true;
                         StartCoroutine(Hit());
                     }
-                    
                 }
                 break;
         }
-        
 	}
 
     IEnumerator Hit()
     {
-        GetComponent<Animator>().Play("PC_Cricket", 0);
-        GetComponent<Collider2D>().enabled = true;
-        yield return new WaitForSeconds(0.5f);
+        
+        yield return new WaitForSeconds(0.2f);
         GetComponent<Collider2D>().enabled = false;
-
     }
 
     public void GetGame(short num)
@@ -102,6 +103,7 @@ public class Move : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Ball")
         {
+            FindObjectOfType<AudioSource>().PlayOneShot(hit);
             Vector2 foot = transform.position;
             foot.y -= 1;
             Vector2 dir = (Vector2)collision.gameObject.transform.position - foot;
