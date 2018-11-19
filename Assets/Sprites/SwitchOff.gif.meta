@@ -65,7 +65,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -76,7 +76,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -93,9 +93,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 960
-        width: 312
-        height: 240
+        y: 0
+        width: 480
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -103,7 +103,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3e087e16eb7f394caba8b6847cbddd1
+      spriteID: 1b455c0ef656eae4d8043a76c36f55b6
       vertices: []
       indices: 
       edges: []
@@ -112,10 +112,10 @@ TextureImporter:
       name: SwitchOff_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 720
-        width: 312
-        height: 240
+        x: 480
+        y: 0
+        width: 480
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -123,7 +123,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35c25db57977a244fa8113b0ff10001a
+      spriteID: f66db78d1ab94d2489d0c4054222ff0d
       vertices: []
       indices: 
       edges: []
@@ -132,10 +132,10 @@ TextureImporter:
       name: SwitchOff_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 480
-        width: 312
-        height: 240
+        x: 960
+        y: 0
+        width: 480
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,7 +143,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 562ee11f1e6c26642a8548ed77b13bdf
+      spriteID: e3bb387add9d9c246966d7851529f14b
       vertices: []
       indices: 
       edges: []
@@ -152,10 +152,10 @@ TextureImporter:
       name: SwitchOff_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 240
-        width: 312
-        height: 240
+        x: 1440
+        y: 0
+        width: 480
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,7 +163,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9f5f1f97452cd543bd367975e695496
+      spriteID: aba475ec189727745afcd6c8c1a90881
       vertices: []
       indices: 
       edges: []
@@ -172,10 +172,10 @@ TextureImporter:
       name: SwitchOff_4
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1920
         y: 0
-        width: 312
-        height: 240
+        width: 480
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,7 +183,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c957c402927993743b84d089d517cb26
+      spriteID: 826ddf80b42a7e34781c7b512bedaa2f
       vertices: []
       indices: 
       edges: []
