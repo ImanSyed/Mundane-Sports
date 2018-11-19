@@ -4,6 +4,8 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: SPR_16_0
     21300002: SPR_16_1
+    21300004: SPR_16_2
+    21300006: SPR_16_3
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -90,6 +92,46 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c24437c7760405845b102e8c0399d589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPR_16_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bd3b261c9108d542a7fdd536a46a14d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPR_16_2
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
         width: 16
         height: 16
@@ -100,13 +142,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e82812780f9e13b40a3ee9745e51716a
+      spriteID: d59044971afa2de48957bdcb3d7a67cb
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPR_16_1
+      name: SPR_16_3
       rect:
         serializedVersion: 2
         x: 16
@@ -120,7 +162,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fac8f062b9be7cf42a650eef1ba76e85
+      spriteID: 26cff8c1550bfae4db663af4088c57c6
       vertices: []
       indices: 
       edges: []
