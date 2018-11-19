@@ -7,8 +7,8 @@ public class Move : MonoBehaviour {
 
     [SerializeField] AudioClip hit;
     short controlScheme;
-    bool left;
-    short kayakspeed = 20;
+    bool left = true;
+    short kayakspeed = 75;
 
     private void Start()
     {
@@ -18,7 +18,7 @@ public class Move : MonoBehaviour {
 
         if (FindObjectOfType<GameManager>().game == 1)
         {
-            kayakspeed = (short)(20 - FindObjectOfType<GameManager>().score);
+            kayakspeed = (short)(75 - FindObjectOfType<GameManager>().score);
             if (kayakspeed < 1)
             {
                 kayakspeed = 1;

@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     public short game = 0;
 
     public int score = 0;
-
+    int savedScore;
     float timer = 0;
 
     [SerializeField] AudioClip click;
@@ -50,10 +50,19 @@ public class GameManager : MonoBehaviour {
 
     private void Update()
     {
+        if (active && GameObject.FindGameObjectWithTag("Finish"))
+        {
+            GameObject.FindGameObjectWithTag("Finish").SetActive(false);
+        }
+        if (game == -1)
+        {
+            FindObjectOfType<Text>().text = savedScore.ToString();
+        }
 
         if(game == -1 && !disabled && Input.anyKeyDown)
         {
             active = false;
+            savedScore = 0;
             NextGame();
         }
 
@@ -157,7 +166,8 @@ public class GameManager : MonoBehaviour {
         staticEffect.SetActive(true);
         GetComponent<AudioSource>().PlayOneShot(click);
         GetComponentInChildren<Animator>().Play("SwitchOff", 0);
-        scoreText.color = Color.white;
+        savedScore = score;
+        score = 0;
     }
 
     public IEnumerator DisableControls(float delay)
