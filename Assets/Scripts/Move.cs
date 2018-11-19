@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Move : MonoBehaviour {
@@ -11,6 +12,8 @@ public class Move : MonoBehaviour {
     private void Start()
     {
         controlScheme = FindObjectOfType<GameManager>().game;
+
+        FindObjectOfType<GameManager>().time = FindObjectOfType<Slider>();
 
         if (FindObjectOfType<GameManager>().game == 1)
         {
@@ -70,7 +73,11 @@ public class Move : MonoBehaviour {
             case 2:
                 if (Input.anyKeyDown)
                 {
-                    StartCoroutine(Hit());
+                    if (!GetComponent<Collider2D>().enabled)
+                    {
+                        StartCoroutine(Hit());
+                    }
+                    
                 }
                 break;
         }
@@ -79,7 +86,7 @@ public class Move : MonoBehaviour {
 
     IEnumerator Hit()
     {
-        yield return new WaitForSeconds(0.1f);
+        GetComponent<Animator>().Play("PC_Cricket", 0);
         GetComponent<Collider2D>().enabled = true;
         yield return new WaitForSeconds(0.5f);
         GetComponent<Collider2D>().enabled = false;
@@ -99,6 +106,10 @@ public class Move : MonoBehaviour {
             foot.y -= 1;
             Vector2 dir = (Vector2)collision.gameObject.transform.position - foot;
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir.normalized * 250);
+            if(controlScheme == 2)
+            {
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir.normalized * 50f);
+            }
         } 
     }
 }

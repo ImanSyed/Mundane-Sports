@@ -10,9 +10,11 @@ public class GameManager : MonoBehaviour {
 
     public int score = 0;
 
-    float timer = 8;
+    float timer = 9;
 
-    [SerializeField] Text timeText, scoreText;
+    [SerializeField] Text scoreText;
+
+    public Slider time;
 
     [SerializeField] GameObject staticEffect;
 
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour {
         scoreText = FindObjectOfType<Text>();
         scoreText.text = score.ToString();
         staticEffect.SetActive(false);
+        time = FindObjectOfType<Slider>();
         foreach(GameManager gm in FindObjectsOfType<GameManager>())
         {
             if (gm != this)
@@ -36,7 +39,7 @@ public class GameManager : MonoBehaviour {
             }
         }
         DontDestroyOnLoad(gameObject);
-        game = 1;
+        game = (short)Random.Range(0, 3);
         switch (game)
         {
             case 0:
@@ -62,26 +65,33 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+
         if (!scoreText)
         {
             scoreText = FindObjectOfType<Text>();
             scoreText.text = score.ToString();
         }
-        if(timer > 0)
+        if (timer > 0)
         {
             timer -= Time.deltaTime;
+            
         }
-        else if(timer < 0)
+        else if (timer < 0)
         {
             timer = 0;
         }
-        if(timer == 0)
+        if (timer == 0)
         {
+            time.enabled = false;
             GameOver();
         }
+        time.value = (int)timer;
+    }
 
+    private void FixedUpdate()
+    {
         if(game == 0)
         {
             if(GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody2D>().velocity.magnitude > 0)
@@ -103,12 +113,11 @@ public class GameManager : MonoBehaviour {
 
     public void NextGame()
     {
-        timer = 8;
+        timer = 9;
         score++;
         short currGame = game;
-        FindObjectOfType<AudioSource>().Play();
-        staticEffect.SetActive(true);
-        StartCoroutine(D());
+
+        StartCoroutine(Static());
         while (currGame == game)
         {
             game = (short)Random.Range(0, 3);
@@ -129,10 +138,15 @@ public class GameManager : MonoBehaviour {
                 FindObjectOfType<Move>().GetGame(game);
                 break;
         }
+
+        time = FindObjectOfType<Slider>();
+        time.value = timer;
     }
 
-    IEnumerator D()
+    IEnumerator Static()
     {
+        FindObjectOfType<AudioSource>().Play();
+        staticEffect.SetActive(true);
         yield return new WaitForSeconds(0.311f);
         staticEffect.SetActive(false);
     }
