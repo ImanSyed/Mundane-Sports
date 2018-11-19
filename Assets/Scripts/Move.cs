@@ -22,7 +22,7 @@ public class Move : MonoBehaviour {
         }
         else if(FindObjectOfType<GameManager>().game == 2)
         {
-            GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody2D>().AddForce(Vector2.left * 1000);
+            GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody2D>().AddForce(Vector2.left * 300);
         }
     }
 
@@ -98,8 +98,7 @@ public class Move : MonoBehaviour {
             Vector2 foot = transform.position;
             foot.y -= 1;
             Vector2 dir = (Vector2)collision.gameObject.transform.position - foot;
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir.normalized * 200);
-        }
-        
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir.normalized * 250);
+        } 
     }
 }

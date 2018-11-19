@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 
 public class GameManager : MonoBehaviour {
@@ -13,10 +14,13 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField] Text timeText, scoreText;
 
+    [SerializeField] GameObject staticEffect;
+
     private void Start()
     {
         scoreText = FindObjectOfType<Text>();
         scoreText.text = score.ToString();
+        staticEffect.SetActive(false);
         foreach(GameManager gm in FindObjectsOfType<GameManager>())
         {
             if (gm != this)
@@ -102,6 +106,9 @@ public class GameManager : MonoBehaviour {
         timer = 8;
         score++;
         short currGame = game;
+        FindObjectOfType<AudioSource>().Play();
+        staticEffect.SetActive(true);
+        StartCoroutine(D());
         while (currGame == game)
         {
             game = (short)Random.Range(0, 3);
@@ -122,6 +129,12 @@ public class GameManager : MonoBehaviour {
                 FindObjectOfType<Move>().GetGame(game);
                 break;
         }
+    }
+
+    IEnumerator D()
+    {
+        yield return new WaitForSeconds(0.311f);
+        staticEffect.SetActive(false);
     }
 
     void GameOver()
