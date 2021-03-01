@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour {
             time.enabled = false;
             GameOver();
         }
-        if (game != -1)
+        if (game != -1 && time != null)
         {
             time.value = (int)timer;
         }
@@ -130,21 +130,21 @@ public class GameManager : MonoBehaviour {
         switch(game)
         {
             case 0:
-            SceneManager.LoadScene("Football");
-                FindObjectOfType<Move>().GetGame(game);
+                SceneManager.LoadScene("Football");
+                //FindObjectOfType<Move>().GetGame(game);
                 break;
             case 1:
                 SceneManager.LoadScene("Kayak");
-                FindObjectOfType<Move>().GetGame(game);
+                //FindObjectOfType<Move>().GetGame(game);
                 break;
             case 2:
                 SceneManager.LoadScene("Cricket");
-                FindObjectOfType<Move>().GetGame(game);
+                //FindObjectOfType<Move>().GetGame(game);
                 break;
         }
 
-        time = FindObjectOfType<Slider>();
-        time.value = timer;
+        //time = FindObjectOfType<Slider>();
+        //time.value = timer;
     }
 
     IEnumerator Static()

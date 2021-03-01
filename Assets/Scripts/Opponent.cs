@@ -2,8 +2,12 @@
 
 public class Opponent : MonoBehaviour {
 
-	void Start () {
-        GetComponent<SpriteRenderer>().sortingOrder = -(int)(transform.position.y * 32);	
+	void Update ()
+    {
+        if (GetComponent<SpriteRenderer>().sortingOrder != -(int)(transform.position.y * 32))
+        {
+            GetComponent<SpriteRenderer>().sortingOrder = -(int)(transform.position.y * 32);
+        }
 	}
 	
 }

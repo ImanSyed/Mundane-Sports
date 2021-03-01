@@ -8,7 +8,8 @@ public class Move : MonoBehaviour {
     [SerializeField] AudioClip hit;
     short controlScheme;
     bool left = true;
-    short kayakspeed = 75;
+    int kayakspeed = 40, runSpeed = 10;
+
 
     private void Start()
     {
@@ -18,16 +19,31 @@ public class Move : MonoBehaviour {
 
         if (FindObjectOfType<GameManager>().game == 1)
         {
-            kayakspeed = (short)(75 - FindObjectOfType<GameManager>().score);
-            if (kayakspeed < 1)
+            kayakspeed = 40 - FindObjectOfType<GameManager>().score;
+            if (kayakspeed < 15)
             {
-                kayakspeed = 1;
+                kayakspeed = 15;
             }
         }
         else if(FindObjectOfType<GameManager>().game == 2)
         {
-            GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody2D>().AddForce(Vector2.left * 300);
+            Invoke("Bowl", Random.Range(0.5f, 2.5f));
         }
+        else
+        {
+            foreach(Opponent op in FindObjectsOfType<Opponent>())
+            {
+                Vector3 pos = op.transform.position;
+                pos.y = Random.Range(-2.5f, 8.5f);
+                op.transform.position = pos;
+            }
+        }
+    }
+
+    void Bowl()
+    {
+
+        GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody2D>().AddForce(Vector2.left * ((FindObjectOfType<GameManager>().score * 2) + Random.Range(275, 375)));
     }
 
     void Update () {
@@ -35,8 +51,8 @@ public class Move : MonoBehaviour {
         {
             case 0:
                 Vector3 pos = transform.position;
-                pos.x += Input.GetAxis("Horizontal") * 0.1f;
-                pos.y += Input.GetAxis("Vertical") * 0.1f;
+                pos.x += Input.GetAxis("Horizontal") * Time.deltaTime * runSpeed;
+                pos.y += Input.GetAxis("Vertical") * Time.deltaTime * runSpeed;
                 if(pos.x != transform.position.x || pos.y != transform.position.y)
                 {
                     GetComponent<Animator>().SetBool("Running", true);
@@ -58,19 +74,26 @@ public class Move : MonoBehaviour {
                 GetComponent<SpriteRenderer>().sortingOrder = -(int)(transform.position.y * 32);
                 break;
             case 1:
-                if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && left)
+                if (left)
                 {
-                    GetComponent<Rigidbody2D>().AddForce(Vector2.right * kayakspeed);
-                    GetComponent<Animator>().Play("PC_KayakL", 0);
-                    FindObjectOfType<GameManager>().GetComponent<AudioSource>().PlayOneShot(hit);
-                    left = false;
+                    if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)))
+                    {
+                        GetComponent<Rigidbody2D>().AddForce(Vector2.right * kayakspeed);
+                        GetComponent<Animator>().Play("PC_KayakL", 0);
+                        FindObjectOfType<GameManager>().GetComponent<AudioSource>().PlayOneShot(hit);
+                        left = false;
+                    }
+                    
                 }
-                if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && !left)
+                else
                 {
-                    GetComponent<Rigidbody2D>().AddForce(Vector2.right * kayakspeed);
-                    GetComponent<Animator>().Play("PC_KayakR", 0);
-                    FindObjectOfType<GameManager>().GetComponent<AudioSource>().PlayOneShot(hit);
-                    left = true;
+                    if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)))
+                    {
+                        GetComponent<Rigidbody2D>().AddForce(Vector2.right * kayakspeed);
+                        GetComponent<Animator>().Play("PC_KayakR", 0);
+                        FindObjectOfType<GameManager>().GetComponent<AudioSource>().PlayOneShot(hit);
+                        left = true;
+                    }
                 }
                 break;
             case 2:
@@ -90,7 +113,7 @@ public class Move : MonoBehaviour {
     IEnumerator Hit()
     {
         
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.25f);
         GetComponent<Collider2D>().enabled = false;
     }
 
@@ -107,10 +130,14 @@ public class Move : MonoBehaviour {
             Vector2 foot = transform.position;
             foot.y -= 1;
             Vector2 dir = (Vector2)collision.gameObject.transform.position - foot;
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir.normalized * 250);
             if(controlScheme == 2)
             {
-                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir.normalized * 50f);
+                dir.y = Random.Range(-1f, 1f);
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir.normalized * Random.Range(200, 350));
+            }
+            else
+            {
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(dir.normalized * Random.Range(150, 250));
             }
         } 
     }
